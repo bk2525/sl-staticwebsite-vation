@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+    <! sets title of page>
+    <head>
+        <title>Boba Page</title>
+    </head>
+
+    <! CSS: sets red font>
+    <style>
+        h1 {
+            color: red
+        }
+    </style>
+
+    <! CSS: button background>
+    <style>
+    #give-btn {
+        background-color: lightgreen;  
+        color: black;                  
+        padding: 10px 20px;            
+        border-radius: 5px;            
+        cursor: pointer;              
+        transition: background-color 0.3s, color 0.3s;
+    } 
+    #give-btn:hover{
+        background-color: darkgreen;
+        color:white;
+    }
+    </style>
+
+
+    <h1><center>Stephen's Site</center></h1>
+    <h2><center>Boba!</center></h2>
+    <p><center>Mmmm...</center></p>
+
+    <br>
+    <center><a href="https://nra.org">Click! Maybe...</a><br></center>
+    <center>
+    <img src="boba.jpg" alt="Boba" width = "500" height = "500">
+    <img src="cat.jpeg" alt="Cat" width="500" height="500" />
+    </center>
+    <center><div id="message"></div></center>
+    <center>
+    <button id="give-btn">Give boba</button>
+    </center>
+    <script>
+        document.getElementById("give-btn").onclick = () => {
+            console.log('I bought boba')
+            document.getElementById("message").innerText = 'you donated boba!'
+        }
+    </script>
+</html>
