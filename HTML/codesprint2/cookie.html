@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kookie Klicker!</title>
+    <style>
+        h1 {
+            color: red;
+        }
+        
+        #cookie {
+            position: relative; /* Allows the image to be moved */
+            transition: top 0.5s; /* Smooth transition */
+            top: 0; /* Initialize top position */
+        }
+        #grandma {
+            width: 300px; /* Adjust as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+        #give-btn {
+            background-color: lightgreen;  
+            color: black;                  
+            padding: 10px 20px;            
+            border-radius: 5px;            
+            cursor: pointer;              
+            transition: background-color 0.3s, color 0.3s;
+        } 
+        #give-btn:hover{
+            background-color: darkgreen;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <h1><center>Kookie Klicker!</center></h1>
+    <h2><center>Click for Kookie</center></h2>
+    <p><center>Mmmm...</center></p>
+    <center>
+        <img id="cookie" src="cookie.jpg" alt="cookie" width="500" height="500">
+        <img id="grandma" src="grandma.jpg" alt="grandma"> 
+    
+    </center>
+    <br>
+    <center>
+        <div style="display: inline-block; margin-right: 200px;" id="message">
+        </div>
+        <button id="give-btn">Get Grandma (-100, but +1 per 10s)</button>
+    </center>
+    <center>
+        <div style="display: inline-block; margin-left: 200px;" id="numGrandmas"> </div>
+    </center>
+    
+    <script>
+        let clicks = 0;
+        let grandmas = 0;
+        let hasMovedUp = false; 
+        let moveTimeout;
+
+        function moveCookie() {
+            const img = document.getElementById("cookie");
+            const currentTop = parseInt(window.getComputedStyle(img).top) || 0;
+
+            if (currentTop > -15) { 
+                img.style.top = (currentTop - 10) + "px"; 
+                hasMovedUp = true; 
+            }
+            
+            clearTimeout(moveTimeout);
+
+            moveTimeout = setTimeout(() => {
+                img.style.top = "0px"; 
+                hasMovedUp = false; 
+            }, 500);
+        }
+        document.getElementById("cookie").onclick = () => {
+            console.log('+1');
+            clicks++;
+            document.getElementById("message").innerText = clicks;
+            moveCookie(); 
+        }
+        document.getElementById("give-btn").onclick = () => {
+            if (clicks >= 100){
+             grandmas++;  
+             document.getElementById("numGrandmas").innerText = grandmas + " grandmas";
+             clicks-=100;
+             document.getElementById("message").innerText = clicks;
+            }   
+        }
+        setInterval(() => {
+        clicks += grandmas; // Increase clicks by the number of grandmas
+        document.getElementById("message").innerText = clicks;
+    }, 10000); // 10 seconds
+    </script>
+</body>
+</html>
